@@ -4,22 +4,30 @@
 cmake_minimum_required (VERSION 3.8)
 
 # TODO: Add tests and install targets if needed.
-project(Server)
 
 if(WIN32)
 	set(BOOST_ROOT E:/boost_1_66_0)
+	set(Header_OWN C:/Users/moham/Source/Repos/CarSharing/Server/main)
+
 	set(BOOST_USE_STATIC_LIBS OFF)
 	set(Boost_USE_MULTITHREADED ON)
 	set(Boost_USE_STATIC_RUNTIME OFF)
 
+	include_directories(${Header_OWN})
 	include_directories(${BOOST_ROOT})
     link_directories(${BOOST_ROOT}/stage/lib) # add this before add_executable()
 endif()
 
+set(CPP_SOURCE User.cpp)
+set(HEADERS User.h)
+set(CPP_SOURCE ManageUser.cpp)
+set(HEADERS ManageUser.h)
+
 # Add source to this project's executable.
+
+
 add_executable (Server "main/Server.cpp")
 
-include_directories(lib lib/ lib)
 
 if(NOT MSVC)
     find_package(Boost REQUIRED COMPONENTS date_time filesystem wserialization system serialization thread regex)

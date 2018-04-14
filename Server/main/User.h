@@ -16,12 +16,12 @@ private:
 
 public:
 	User(string, string, int, string, string, string);
-	string getId;
-	string getName;
-	int getAge;
-	string getEmail;
-	string getAddress;
-	string getPhone;
+	string getId();
+	string getName();
+	int getAge();
+	string getEmail();
+	string getAddress();
+	string getPhone();
 
 
 	void setName(string name);
