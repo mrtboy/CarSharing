@@ -10,6 +10,7 @@ class ManageUser {
 public:
 	bool userExist(string userId);
 	bool insert(User model);
+
 	vector<User> getAllUsers();
 
 	static vector<User> users;
