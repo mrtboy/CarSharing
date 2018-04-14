@@ -4,6 +4,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 # TODO: Add tests and install targets if needed.
+project(Server)
 
 if(WIN32)
 	set(BOOST_ROOT E:/boost_1_66_0)
@@ -18,6 +19,7 @@ endif()
 # Add source to this project's executable.
 add_executable (Server "main/Server.cpp")
 
+include_directories(lib lib/ lib)
 
 if(NOT MSVC)
     find_package(Boost REQUIRED COMPONENTS date_time filesystem wserialization system serialization thread regex)
