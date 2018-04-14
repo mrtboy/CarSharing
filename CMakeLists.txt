@@ -7,4 +7,3 @@ project ("CarSharing")
 
 # Include sub-projects.
 add_subdirectory ("Server")
-add_subdirectory ("Client")

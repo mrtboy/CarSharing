@@ -3,10 +3,9 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-# TODO: Add tests and install targets if needed.
-
 if(WIN32)
 	set(BOOST_ROOT E:/boost_1_66_0)
+
 	set(BOOST_USE_STATIC_LIBS OFF)
 	set(Boost_USE_MULTITHREADED ON)
 	set(Boost_USE_STATIC_RUNTIME OFF)
@@ -16,7 +15,7 @@ if(WIN32)
 endif()
 
 # Add source to this project's executable.
-add_executable (Client "main/Client.cpp")
+add_executable (Client )
 
 
 if(NOT MSVC)
@@ -27,3 +26,5 @@ if(NOT MSVC)
         target_link_libraries(your_exec ${Boost_LIBRARIES})
     endif()
 endif()
+
+# TODO: Add tests and install targets if needed.

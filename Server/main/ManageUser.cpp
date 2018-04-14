@@ -20,8 +20,7 @@ bool ManageUser::userExist(string userId) {
 bool ManageUser::insert(User model)
 {
 	try {
-		/*User user(model.getId(), model.getName(), model.getAddress(), model.getAge(), model.getPhone(), model.getEmail());*/
-		
+
 		users.push_back(model);
 		return true;
 	}
