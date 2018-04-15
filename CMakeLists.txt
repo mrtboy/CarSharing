@@ -3,8 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("CS_CMake")
+project ("CarSharing")
 
 # Include sub-projects.
 add_subdirectory ("Server")
-add_subdirectory ("Client")
