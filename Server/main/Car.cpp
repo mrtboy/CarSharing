@@ -182,6 +182,8 @@ string Car::getOwner() {
 }
 
 	list<string> Car::getCarInfo() {
+
+
 		return this->CarInfo;
 
 	}
