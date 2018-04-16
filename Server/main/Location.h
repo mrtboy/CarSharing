@@ -7,21 +7,18 @@ class Location
 
 private:
 
-
 	std::string address{ "test" };
-	int test = 5;
-
+	
 public:
-	// int für test
 
-	Location(string, int) {}
+	
+	Location(string);
 
 	string getLocation();
-	int getTest();
-
-	void setTest(int test);
+	
 	void setLocation(string address);
 
-	Location() {}
-	~Location() {}
+	
+	Location() {};
+	~Location() {};
 };
