@@ -19,7 +19,7 @@ endif()
 # Add source to this project's executable.
 
 
-add_executable (Server "main/Server.cpp" "main/Server.h" "main/User.h" "main/User.cpp" "main/ManageUser.h" "main/ManageUser.cpp")
+add_executable (Server "main/Server.cpp" "main/Server.h" "main/User.h" "main/User.cpp" "main/ManageUser.h" "main/ManageUser.cpp" "main/Location.h" "main/Location.cpp")
 
 
 if(NOT MSVC)
