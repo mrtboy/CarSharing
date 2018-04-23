@@ -2,23 +2,24 @@
 
 using namespace std;
 
-class Location
+class Car_Location
+
+
 {
 
 private:
 
-	std::string address{ "test" };
+	string address;
 	
 public:
 
-	
-	Location(string);
+	Car_Location(string);
 
 	string getLocation();
 	
 	void setLocation(string address);
 
 	
-	Location() {};
-	~Location() {};
+	Car_Location() {}
+	~Car_Location() {}
 };
