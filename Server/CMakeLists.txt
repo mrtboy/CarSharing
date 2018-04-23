@@ -44,14 +44,14 @@ add_library(Car_Location "main/Car_Location.cpp" "main/Car_Location.h")
 add_library(User "main/User.cpp" "main/User.h")
 add_library(ManageUser  "main/ManageUser.h" "main/ManageUser.cpp")
 
-<<<<<<< 9b06254381250aebd5e595618f7130f96fc55544
+
 target_link_libraries(ManageUser User)
 	
 # Add source to this project's executable.
-add_executable (Server "main/Server.cpp" "main/Server.h")
-=======
+
+
 add_executable (Server "main/Server.cpp" "main/Server.h" "main/User.h" "main/User.cpp" "main/ManageUser.h" "main/ManageUser.cpp" "main/Car_Location.h" "main/Car_Location.cpp" "main/Car.h" "main/Car.cpp")
->>>>>>> Changed Location again. To Class. Not to List.
+
 
 
 target_link_libraries(Server ManageUser)
