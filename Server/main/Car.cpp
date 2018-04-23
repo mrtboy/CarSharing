@@ -182,6 +182,11 @@ string Car::getOwner() {
 }
 
 	list<string> Car::getCarInfo() {
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ab5d8b7f17ec9801f79bcbfbcaf9f71cd67c5f94
 		return this->CarInfo;
 
 	}
