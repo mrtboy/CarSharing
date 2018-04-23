@@ -16,6 +16,9 @@ if(WIN32)
     link_directories(${BOOST_ROOT}/stage/lib) # add this before add_executable()
 endif()
 
+
+
+target_link_libraries(ManageUser User)
 # Add source to this project's executable.
 
 
