@@ -27,6 +27,20 @@ if(WIN32)
     link_directories(${BOOST_ROOT}/stage/lib) # add this before add_executable()
 endif()
 
+
+
+
+add_library(Car "main/Car.cpp" "main/Car.h")
+add_library(Car_Location "main/Car_Location.cpp" "main/Car_Location.h")
+
+
+
+
+	
+# Add source to this project's executable.
+
+
+
 add_library(User "main/User.cpp" "main/User.h")
 add_library(ManageUser "main/ManageUser.h" "main/ManageUser.cpp")
 
@@ -36,10 +50,15 @@ add_library(ClientController "main/ClientController.cpp")
 
 #target_link_libraries(User MenuGenerator)
 
+
 target_link_libraries(ManageUser User)
 	
 # Add source to this project's executable.
-add_executable (Server "main/Server.cpp" "main/Server.h")
+
+
+add_executable (Server "main/Server.cpp" "main/Server.h" "main/User.h" "main/User.cpp" "main/ManageUser.h" "main/ManageUser.cpp" "main/Car_Location.h" "main/Car_Location.cpp" "main/Car.h" "main/Car.cpp")
+
+
 
 target_link_libraries(Server MenuGenerator)
 
