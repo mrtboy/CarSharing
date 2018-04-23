@@ -28,14 +28,20 @@ if(WIN32)
 endif()
 
 add_library(User "main/User.cpp" "main/User.h")
-add_library(ManageUser  "main/ManageUser.h" "main/ManageUser.cpp")
+add_library(ManageUser "main/ManageUser.h" "main/ManageUser.cpp")
+
+add_library(MenuGenerator "main/MenuGenerator.h" "main/MenuGenerator.cpp")
+
+add_library(ClientController "main/ClientController.cpp")
+
+#target_link_libraries(User MenuGenerator)
 
 target_link_libraries(ManageUser User)
 	
 # Add source to this project's executable.
 add_executable (Server "main/Server.cpp" "main/Server.h")
 
-target_link_libraries(Server ManageUser)
+target_link_libraries(Server MenuGenerator)
 
 if(NOT MSVC)
     find_package(Boost REQUIRED COMPONENTS date_time filesystem wserialization system serialization thread regex)
