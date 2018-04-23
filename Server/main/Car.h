@@ -73,5 +73,6 @@ public:
 	void setPrice(int price);
 	void setCarInfo(list<string> CarInfo);
 
-
+	Car() {};
+	~Car() {};
 };
