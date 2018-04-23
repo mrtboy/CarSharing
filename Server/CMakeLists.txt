@@ -21,14 +21,13 @@ endif()
 add_library(Car "main/Car.cpp" "main/Car.h")
 add_library(Car "main/Car_Location.cpp" "main/Car_Location.h")
 
-add_library(User "main/User.cpp" "main/User.h")
-add_library(ManageUser  "main/ManageUser.h" "main/ManageUser.cpp")
 
-target_link_libraries(ManageUser User)
+
+
 	
 # Add source to this project's executable.
->>>>>>> master
-add_executable (Server "main/Server.cpp" "main/Server.h")
+
+
 
 
 if(NOT MSVC)
