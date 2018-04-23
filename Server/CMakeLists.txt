@@ -31,7 +31,7 @@ endif()
 
 
 add_library(Car "main/Car.cpp" "main/Car.h")
-add_library(Car "main/Car_Location.cpp" "main/Car_Location.h")
+add_library(Car_Location "main/Car_Location.cpp" "main/Car_Location.h")
 
 
 
