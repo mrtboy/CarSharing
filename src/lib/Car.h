@@ -1,24 +1,19 @@
+#ifndef CAR_H
+#define CAR_H
 
-//#include "stdafx.h"
+#include "libdef.h"
 #include <string>
-#include <list>
-#include "Car_Location.h"
-
-
-
+#include <iostream>
 
 using namespace std;
 
-
-class Car
-{
+class EXPORT_SYMBOL Car {
 
 private:
 
 	string owner ;
 	int price;
-    list<string> CarInfo;
-	Car_Location location;
+	string location;
 	int id;
 	string model;
 	int year;
@@ -32,23 +27,16 @@ private:
 
 	
 public:
-
-	
-	Car(string, int, list<string>, Car_Location, int, string, int, string, int, int, string, string, string, bool);
-
+	Car(string owner, int price, string location, int id, string model, int year, string engine, int NoOFDoors, 
+		int seats, string transmission, string consumption, string type, bool isAvalable);
 
 	string getEngine();
 	int getYear();
 	int getID();
 	string getModel();
-	Car_Location getLocation();
-	
-
+	string getLocation();
 	string getOwner();
-
 	int getPrice();
-	list<string> getCarInfo();
-
 	int getNoOfDoors();
 	int getSeats();
 	string getTransmission();
@@ -67,12 +55,12 @@ public:
 	void setEngine(string engine);
 	void setID(int id);
 	void setModel(string model);
-	void setLocation(Car_Location location);
-	
+	void setLocation(string location);
 	void setOwner(string owner);
 	void setPrice(int price);
-	void setCarInfo(list<string> CarInfo);
 
 	Car() {};
 	~Car() {};
 };
+
+#endif // !CAR_H
