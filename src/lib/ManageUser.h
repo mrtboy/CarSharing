@@ -1,12 +1,14 @@
 #ifndef MANAGEUSER_H
 #define MANAGEUSER_H
+
 #include <string>
 #include "User.h"
 #include <vector>
+#include "libdef.h"
 
 using namespace std;
 
-class ManageUser {
+class EXPORT_SYMBOL ManageUser {
 public:
 	bool userExist(string userId);
 	bool insert(User model);
@@ -17,10 +19,7 @@ public:
 
 	ManageUser() {};
 	~ManageUser() {};
-protected:
-
-private:
 
 };
 
-#endif
+#endif // !MANAGEUSER_H

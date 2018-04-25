@@ -1,6 +1,7 @@
 #include "User.h"
 
-User::User(string id, string name, int age, string phone, string address, string email) {
+User::User(string id, string name, int age, string phone, 
+	string address, string email) {
 	this->id = id;
 	this->name = name;
 	this->age = age;

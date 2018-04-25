@@ -1,17 +1,10 @@
 #include "ManageUser.h"
 #include <algorithm>
 
-
 vector<User> ManageUser::users;
 
-
-
 vector<User> ManageUser::getAllUsers() {
-
 	return this->users;
-
-
-
 }
 bool ManageUser::userExist(string userId) {
 	for (auto &user : users)
