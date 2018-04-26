@@ -8,5 +8,5 @@ add_executable(Server Server.cpp)
 
 
 #every library should linked to Server 
-target_link_libraries(Server debug Car.lib User.lib ManageUser.lib ManageCar.lib)
-target_link_libraries(Server optimized Car.lib User.lib ManageUser.lib ManageCar.lib)
+target_link_libraries(Server debug Car.dll User.dll ManageUser.dll ManageCar.dll)
+target_link_libraries(Server optimized Car.dll User.dll ManageUser.dll ManageCar.dll)

@@ -10,10 +10,10 @@ add_library(ManageCar SHARED ManageCar.cpp ${headers})
 add_definitions(-DEXPMODULE)
 
 # Add source to this project's executable.
-target_link_libraries(ManageCar debug Car.lib)
-target_link_libraries(ManageCar optimized Car.lib)
+target_link_libraries(ManageCar debug Car.dll)
+target_link_libraries(ManageCar optimized Car.dll)
 
-target_link_libraries(ManageUser debug User.lib)
-target_link_libraries(ManageUser optimized User.lib)
+target_link_libraries(ManageUser debug User.dll)
+target_link_libraries(ManageUser optimized User.dll)
 
 # Add source to this project's executable.
