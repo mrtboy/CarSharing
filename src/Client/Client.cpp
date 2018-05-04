@@ -1,51 +1,47 @@
 #include <iostream>
-#include <string>
-#include <memory>
-#include <boost/asio/buffer.hpp>
-#include <boost/asio/io_service.hpp>
-#include <boost/asio/ip/tcp.hpp>
+#include <boost/array.hpp>
+#include <boost/asio.hpp>
 
+using boost::asio::ip::tcp;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	try
 	{
-		typedef boost::asio::ip::tcp asiotcp;
 		if (argc != 2)
 		{
 			std::cerr << "Usage: client <host>" << std::endl;
 			return 1;
 		}
 
-		boost::asio::io_service io_service;
+		boost::asio::io_context io_context;
 
-		asiotcp::endpoint server_endpoint = asiotcp::endpoint(
-			boost::asio::ip::address_v4::from_string(argv[1]),
-			13);
-		for (;;) {
-			asiotcp::socket socket(io_service);
-			socket.open(asiotcp::v4());
+		tcp::resolver resolver(io_context);
+		tcp::resolver::results_type endpoints =
+			resolver.resolve(argv[1], "daytime");
 
-			std::string item = "";
-			std::cin >> item;
+		tcp::socket socket(io_context);
+		boost::asio::connect(socket, endpoints);
 
-			socket.connect(server_endpoint);
-			std::string const send_buf = item;
-			socket.send(boost::asio::buffer(send_buf));
+		for (;;)
+		{
+			boost::array<char, 128> buf;
+			boost::system::error_code error;
 
-			std::array<char, 128> recv_buf;
-			size_t const len = socket.receive(
-				boost::asio::buffer(recv_buf));
+			size_t len = socket.read_some(boost::asio::buffer(buf), error);
 
-			std::string const received_message(recv_buf.data(), len);
-			std::cout << "received from server: \"" << received_message << "\"" << std::endl;
+			if (error == boost::asio::error::eof)
+				break; // Connection closed cleanly by peer.
+			else if (error)
+				throw boost::system::system_error(error); // Some other error.
+
+			std::cout.write(buf.data(), len);
 		}
 	}
-	catch (std::exception const &e)
+	catch (std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
 
 	return 0;
 }
-
