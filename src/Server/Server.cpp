@@ -1,122 +1,63 @@
-#include <ctime>
 #include <iostream>
 #include <string>
-#include <boost/bind.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/asio.hpp>
-#include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/serialization/string.hpp>
+#include <memory>
+#include <boost/asio/buffer.hpp>
+#include <boost/asio/io_service.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <boost\archive\binary_oarchive.hpp>
+#include <boost\archive\binary_iarchive.hpp>
 #include "User.h"
+
 using namespace boost::archive;
-using boost::asio::ip::tcp;
+using namespace boost::asio;
+std::stringstream stringStream;
 
-stringstream ss;
-
-void save()
+template<class Archive, class Object>
+void deserialise_to_obj(std::string const &s1, Object &outObj)
 {
-	binary_oarchive oa{ ss };
-	User a{ "Id","Name",23,"Address","Email","other" };
-	oa << a;
-}
-
-string load()
-{
-	binary_iarchive ia{ ss };
-	User a;
-	ia >> a;
-	return a.getAddress();
-}
-
-class tcp_connection
-	: public boost::enable_shared_from_this<tcp_connection>
-{
-public:
-	typedef boost::shared_ptr<tcp_connection> pointer;
-
-	static pointer create(boost::asio::io_context& io_context)
-	{
-		return pointer(new tcp_connection(io_context));
-	}
-
-	tcp::socket& socket()
-	{
-		return socket_;
-	}
-
-	void start()
-	{
-		message_ = load();
-
-		boost::asio::async_write(socket_, boost::asio::buffer(message_),
-			boost::bind(&tcp_connection::handle_write, shared_from_this(),
-				boost::asio::placeholders::error,
-				boost::asio::placeholders::bytes_transferred));
-	}
-
-private:
-	tcp_connection(boost::asio::io_context& io_context)
-		: socket_(io_context)
-	{
-	}
-
-	void handle_write(const boost::system::error_code& /*error*/,
-		size_t /*bytes_transferred*/)
-	{
-	}
-
-	tcp::socket socket_;
-	std::string message_;
-};
-
-class tcp_server
-{
-public:
-	tcp_server(boost::asio::io_context& io_context)
-		: acceptor_(io_context, tcp::endpoint(tcp::v4(), 13))
-	{
-		start_accept();
-	}
-
-private:
-	void start_accept()
-	{
-		tcp_connection::pointer new_connection =
-			tcp_connection::create(acceptor_.get_executor().context());
-
-		acceptor_.async_accept(new_connection->socket(),
-			boost::bind(&tcp_server::handle_accept, this, new_connection,
-				boost::asio::placeholders::error));
-	}
-
-	void handle_accept(tcp_connection::pointer new_connection,
-		const boost::system::error_code& error)
-	{
-		if (!error)
-		{
-			new_connection->start();
-		}
-
-		start_accept();
-	}
-
-	tcp::acceptor acceptor_;
+	std::stringstream is(s1, std::ios_base::binary | std::ios_base::out | std::ios_base::in);
+	Archive arch{ is, boost::archive::no_header };
+	arch >> BOOST_SERIALIZATION_NVP(outObj);
 };
 
 int main()
 {
-	save();
+
 	try
 	{
-		boost::asio::io_context io_context;
-		tcp_server server(io_context);
-		io_context.run();
+		typedef boost::asio::ip::tcp asiotcp;
+		boost::asio::io_service io_service;
+
+		while (true)
+		{
+			asiotcp::socket socket(io_service);
+
+			asiotcp::acceptor a(io_service, asiotcp::endpoint(asiotcp::v4(), 13));
+			a.accept(socket);
+
+			std::array<char, 256> recv_buf;
+
+			std::size_t const received_bytes = socket.receive(
+				boost::asio::buffer(recv_buf));
+
+			std::string const inputmessage(recv_buf.data(), received_bytes);
+			std::cout << "Client sent message: \"" << inputmessage << "\"" << std::endl;
+
+			User outObj;
+			deserialise_to_obj<binary_iarchive>(inputmessage, outObj);
+
+						
+			std::cout << outObj.getEmail() << std::endl;
+
+			std::string const message = "hello client.\n";
+			socket.send(boost::asio::buffer(message));
+		}
 	}
-	catch (std::exception& e)
+	catch (std::exception const &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
 
 	return 0;
 }
+

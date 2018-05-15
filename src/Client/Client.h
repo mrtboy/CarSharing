@@ -1,5 +1,5 @@
-#ifndef MANAGEUSER_H
-#define MANAGEUSER_H
+#ifndef CLIENT_H
+#define CLIENT_H
 #include <iostream>
 
 

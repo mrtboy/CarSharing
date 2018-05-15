@@ -39,6 +39,7 @@ public:
 
 	User() {};
 	~User() {};
+
 	friend boost::serialization::access;
 
 	template<typename Archive>

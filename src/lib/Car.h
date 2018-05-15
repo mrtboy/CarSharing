@@ -4,6 +4,9 @@
 #include "libdef.h"
 #include <string>
 #include <iostream>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/string.hpp>
 
 using namespace std;
 
@@ -61,6 +64,30 @@ public:
 
 	Car() {};
 	~Car() {};
+
+	friend boost::serialization::access;
+
+	template<typename Archive>
+	friend void serialize(Archive &ar, Car &c, const unsigned int version);
 };
+template <typename Archive>
+void serialize(Archive &ar, Car &c, const unsigned int version)
+{
+	ar & c.owner;
+	ar & c.price;
+	ar & c.location;
+	ar & c.id;
+	ar & c.model;
+	ar & c.year;
+	ar & c.engine;
+	ar & c.NoOfDoors;
+	ar & c.seats;
+	ar & c.transmission;
+	ar & c.consumption;
+	ar & c.type;
+	ar & c.isAvailable;
+
+}
+
 
 #endif // !CAR_H

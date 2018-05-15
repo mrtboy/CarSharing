@@ -1,47 +1,33 @@
 #include <iostream>
-#include <boost/array.hpp>
-#include <boost/asio.hpp>
+#include <string>
+#include <memory>
+//#include <boost\asio.hpp>
+//#include <boost\bind.hpp>
+//#include <boost\asio\buffer.hpp>
+//#include <boost\asio\io_service.hpp>
+//#include <boost\asio\ip\tcp.hpp>
+//#include <boost\archive\binary_oarchive.hpp>
+//#include <boost\archive\binary_iarchive.hpp>
+//#include <boost\serialization\string.hpp>
+#include "User.h"
+//#include <boost\serialization\vector.hpp>
+#include "MainMenu.h"
+#include "Connection.h"
+#include "Car.h"
 
-using boost::asio::ip::tcp;
+//using namespace boost::archive;
+//using namespace boost::asio;
+//std::stringstream stringStream;
+using namespace std;
 
-int main(int argc, char* argv[])
+int main()
 {
-	try
-	{
-		if (argc != 2)
-		{
-			std::cerr << "Usage: client <host>" << std::endl;
-			return 1;
-		}
+	User user{ "ass","ss",2,"ss","dd","Ff" };
+	shared_ptr<Connection> cc = make_shared<Connection>();
+	cc->connectToServer(user);
 
-		boost::asio::io_context io_context;
-
-		tcp::resolver resolver(io_context);
-		tcp::resolver::results_type endpoints =
-			resolver.resolve(argv[1], "daytime");
-
-		tcp::socket socket(io_context);
-		boost::asio::connect(socket, endpoints);
-
-		for (;;)
-		{
-			boost::array<char, 128> buf;
-			boost::system::error_code error;
-
-			size_t len = socket.read_some(boost::asio::buffer(buf), error);
-
-			if (error == boost::asio::error::eof)
-				break; // Connection closed cleanly by peer.
-			else if (error)
-				throw boost::system::system_error(error); // Some other error.
-
-			std::cout.write(buf.data(), len);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
+	Car car{"",22,"22",22,"ed",23,"ewe",3,4,"eee","232","2323",true};
+	cc->connectToServer(car);
+	
 	return 0;
 }
