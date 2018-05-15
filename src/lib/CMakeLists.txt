@@ -6,6 +6,8 @@ add_library(User SHARED User.cpp ${headers})
 add_library(Car SHARED Car.cpp ${headers})
 add_library(ManageUser SHARED ManageUser.cpp ${headers})
 add_library(ManageCar SHARED ManageCar.cpp ${headers})
+add_library(Connection SHARED Connection.cpp ${headers})
+add_library(Stock SHARED Stock.cpp ${headers})
 
 add_definitions(-DEXPMODULE)
 

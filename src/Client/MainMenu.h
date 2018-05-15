@@ -5,7 +5,8 @@
 #include <boost\archive\binary_oarchive.hpp>
 #include <boost\archive\binary_iarchive.hpp>
 #include "User.h"
-#include "Connection.h"
+#include "Client.h"
+
 
 using namespace std;
 
@@ -17,8 +18,6 @@ public:
 
 	MainMenu() {};
 	~MainMenu() {};
-
-	
 
 private:
 	
@@ -174,6 +173,8 @@ void MainMenu::addNewCustomerMenu() {
 	cin >> phone;
 
 	User user{ id,name,age, email,address, phone };
+	
+	
 
 }
 
