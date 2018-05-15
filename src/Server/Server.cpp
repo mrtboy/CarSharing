@@ -7,6 +7,7 @@
 #include <boost\archive\binary_oarchive.hpp>
 #include <boost\archive\binary_iarchive.hpp>
 #include "User.h"
+#include "ManageUser.h"
 
 using namespace boost::archive;
 using namespace boost::asio;
@@ -41,16 +42,27 @@ int main()
 				boost::asio::buffer(recv_buf));
 
 			std::string const inputmessage(recv_buf.data(), received_bytes);
-			std::cout << "Client sent message: \"" << inputmessage << "\"" << std::endl;
+			//std::cout << "Client sent message: \"" << inputmessage << "\"" << std::endl;
+			
+			//ManageUser mu;
+			User user;
 
-			User outObj;
-			deserialise_to_obj<binary_iarchive>(inputmessage, outObj);
+			//mu.insert(user);
+			deserialise_to_obj<binary_iarchive>(inputmessage, user);
+			ManageUser mu;
+			mu.insert(user);
 
-						
-			std::cout << outObj.getEmail() << std::endl;
+			int vectorSize = ManageUser::users.size();
+			
+			//cout << ManageUser::users[0].getName() << endl;
 
-			std::string const message = "hello client.\n";
-			socket.send(boost::asio::buffer(message));
+			binary_oarchive oArchive{ stringStream, boost::archive::no_header };
+
+			oArchive << ManageUser::users[0];
+
+			std::string const send_buf = stringStream.str();
+			socket.send(boost::asio::buffer(send_buf));
+			
 		}
 	}
 	catch (std::exception const &e)

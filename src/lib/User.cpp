@@ -60,4 +60,8 @@ void User::setEmail(string email) {
 	this->email = email;
 }
 
+string User::getUserString() {
+	return "Customer Id: " + id + " name: " + name + " Age: " + " Phone: " + phone + " Address: " + address + " Email: " + email + ".";
+}
+
 #pragma endregion

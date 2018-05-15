@@ -5,6 +5,7 @@
 #include <boost\archive\binary_oarchive.hpp>
 #include <boost\archive\binary_iarchive.hpp>
 #include "User.h"
+#include "Connection.h"
 
 using namespace std;
 
@@ -32,7 +33,7 @@ protected:
 	void returnCarMenu();
 
 	//Customer Management Menu
-	User addNewCustomerMenu();
+	void addNewCustomerMenu();
 	void getCustomerInfo();
 };
 
@@ -150,7 +151,7 @@ void MainMenu::getCustomerInfo() {
 
 }
 
-User MainMenu::addNewCustomerMenu() {
+void MainMenu::addNewCustomerMenu() {
 	string id = "";
 	string name = "";
 	int age = 0;
@@ -174,7 +175,6 @@ User MainMenu::addNewCustomerMenu() {
 
 	User user{ id,name,age, email,address, phone };
 
-	return user;
 }
 
 #endif

@@ -29,7 +29,7 @@ public:
 	string getEmail();
 	string getAddress();
 	string getPhone();
-
+	string getUserString();
 
 	void setName(string name);
 	void setAge(int age);

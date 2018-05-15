@@ -22,12 +22,19 @@ using namespace std;
 
 int main()
 {
-	User user{ "ass","ss",2,"ss","dd","Ff" };
+	User user{ "1","ss",2,"ss","dd","Ff" };
+	User user2{ "2","sdf",2,"ss","sdf","Ff" };
+	User user3{ "3","sfsds",2,"sdf","dd","Ff" };
 	shared_ptr<Connection> cc = make_shared<Connection>();
+	shared_ptr<Connection> cc1 = make_shared<Connection>();
 	cc->connectToServer(user);
+	cc1->connectToServer(user2);
+	cc->connectToServer(user3);
 
-	Car car{"",22,"22",22,"ed",23,"ewe",3,4,"eee","232","2323",true};
-	cc->connectToServer(car);
+	//Car car{"",22,"22",22,"ed",23,"ewe",3,4,"eee","232","2323",true};
+	//cc->connectToServer(car);
+
+
 	
 	return 0;
 }
