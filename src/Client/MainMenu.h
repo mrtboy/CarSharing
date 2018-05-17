@@ -6,7 +6,9 @@
 #include <boost\archive\binary_iarchive.hpp>
 #include "User.h"
 #include "Client.h"
-
+#include "Connection.h"
+#include "ManageUser.h"
+#include "Connection.h"
 
 using namespace std;
 
@@ -15,15 +17,6 @@ class MainMenu
 public:
 
 	void createMainMenu();
-
-	MainMenu() {};
-	~MainMenu() {};
-
-private:
-	
-
-protected:
-	//Main Menu
 	void customerManagementMenu();
 	void carManagementMenu();
 	void showAllCarsMenu();
@@ -32,8 +25,19 @@ protected:
 	void returnCarMenu();
 
 	//Customer Management Menu
-	void addNewCustomerMenu();
+	User addNewCustomerMenu();
 	void getCustomerInfo();
+
+	MainMenu() {};
+	~MainMenu() {};
+
+private:
+	ManageUser manageUser;
+	//Main Menu
+
+
+protected:
+	
 };
 
 //Main Menu
@@ -45,7 +49,7 @@ void MainMenu::createMainMenu() {
 
 	char option = '0';
 	cin >> option;
-
+	
 	switch (option) {
 	case '1':
 		MainMenu::customerManagementMenu();
@@ -150,7 +154,7 @@ void MainMenu::getCustomerInfo() {
 
 }
 
-void MainMenu::addNewCustomerMenu() {
+User MainMenu::addNewCustomerMenu() {
 	string id = "";
 	string name = "";
 	int age = 0;
@@ -173,9 +177,8 @@ void MainMenu::addNewCustomerMenu() {
 	cin >> phone;
 
 	User user{ id,name,age, email,address, phone };
-	
-	
-
+	//manageUser.insert(user);
+	return user;
 }
 
 #endif
