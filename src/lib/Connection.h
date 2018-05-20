@@ -1,5 +1,5 @@
-#ifndef SERIALIZATION_CONNECTION_HPP
-#define SERIALIZATION_CONNECTION_HPP
+#ifndef SERIALIZATION_CONNECTION_H
+#define SERIALIZATION_CONNECTION_H
 
 #include <boost/asio.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include "libdef.h"
 
 
 /// The Connection class provides serialization primitives on top of a socket.
@@ -20,7 +21,7 @@
 * hexadecimal.
 * @li The serialized data.
 */
-class Connection
+class EXPORT_SYMBOL Connection
 {
 public:
 	/// Constructor.

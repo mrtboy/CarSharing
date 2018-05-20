@@ -1,45 +1,7 @@
-#ifndef MAINMENU_H
-#define MAINMENU_H
-#include <iostream>
-#include <string>
-#include <boost\archive\binary_oarchive.hpp>
-#include <boost\archive\binary_iarchive.hpp>
-#include "User.h"
-#include "Client.h"
-#include "Connection.h"
-#include "ManageUser.h"
-#include "Connection.h"
+#include "MainMenu.h"
+
 
 using namespace std;
-
-class MainMenu
-{
-public:
-
-	void createMainMenu();
-	void customerManagementMenu();
-	void carManagementMenu();
-	void showAllCarsMenu();
-	void showAvailableCarMenu();
-	void rentCatMenu();
-	void returnCarMenu();
-
-	//Customer Management Menu
-	User addNewCustomerMenu();
-	void getCustomerInfo();
-
-	MainMenu() {};
-	~MainMenu() {};
-
-private:
-	ManageUser manageUser;
-	//Main Menu
-
-
-protected:
-	
-};
-
 //Main Menu
 void MainMenu::createMainMenu() {
 	cout << "==> Welcome to Car sharing <==" << endl;
@@ -49,7 +11,7 @@ void MainMenu::createMainMenu() {
 
 	char option = '0';
 	cin >> option;
-	
+
 	switch (option) {
 	case '1':
 		MainMenu::customerManagementMenu();
@@ -176,9 +138,12 @@ User MainMenu::addNewCustomerMenu() {
 	cout << "Phone: " << endl;
 	cin >> phone;
 
-	User user{ id,name,age, email,address, phone };
-	//manageUser.insert(user);
+	User user{ id,name,age, email,address , phone };
+	//manageUser.insert(user
 	return user;
 }
 
-#endif
+
+
+
+
