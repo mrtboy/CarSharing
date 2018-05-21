@@ -19,15 +19,14 @@ void Server::handle_accept(const boost::system::error_code& e, connection_ptr co
 
 	if (!e)
 	{
-		
-		conn->async_read(userWrapper,
+		conn->async_read(user_,
 			boost::bind(&Server::handle_read, this,
 				boost::asio::placeholders::error, conn));
 
-		conn->async_write(user_,
-			boost::bind(&Server::handle_write, this,
-				boost::asio::placeholders::error, conn));
-
+		/*conn->async_read(test_,
+			boost::bind(&Server::handle_read, this,
+				boost::asio::placeholders::error, conn));*/
+		
 	}
 
 	// Start an accept operation for a new connection.
@@ -39,19 +38,24 @@ void Server::handle_accept(const boost::system::error_code& e, connection_ptr co
 
 void Server::handle_read(const boost::system::error_code& e, connection_ptr conn)
 {
-	cout << "read" << endl;
-
 	if (!e)
 	{
-		cout << "read in" << endl;
-		users_.push_back(userWrapper[AddNewUser]);
-		for (std::size_t i = 0; i < users_.size(); ++i) {
-			cout << users_[i].getUserString() << endl;
-		}
-		conn->async_read(userWrapper,
+		
+		cout << "read" << endl;
+		manageUser.insert(user_);
+		cout << user_.getUserString() << endl;
+		
+		handle_write(e, conn);
+
+		
+
+		/*conn->async_read(user_,
 			boost::bind(&Server::handle_read, this,
 				boost::asio::placeholders::error, conn));
-		
+
+		conn->async_write(users_,
+			boost::bind(&Server::handle_read, this,
+				boost::asio::placeholders::error, conn));*/
 	}
 	else
 	{
@@ -63,7 +67,10 @@ void Server::handle_read(const boost::system::error_code& e, connection_ptr conn
 /// Handle completion of a write operation.
 void Server::handle_write(const boost::system::error_code& e, connection_ptr conn)
 {
-	
+	cout << "write" << endl;
+	conn->async_write(manageUser.users,
+		boost::bind(&Server::handle_read, this,
+			boost::asio::placeholders::error, conn));
 }
 
 int main(int argc, char* argv[])

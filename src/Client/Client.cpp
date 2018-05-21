@@ -25,40 +25,29 @@ void Client::handle_connect(const boost::system::error_code& e)
 {
 	if (!e)
 	{
-		int input;
+		int input = 0;
 		cin >> input;
-		User user;
-		switch (input)
-		{
-		case 1:
-		
-			user = mainMenu.addNewCustomerMenu();
-			userWrapper[AddNewUser] = user;
-			cout << user.getUserString() << endl;
-
-			connection_.async_write(userWrapper,
-				boost::bind(&Client::handle_connect, this,
+		if (input == 1) {
+			User user{ "1","1",1,"1","1","1" };
+			user_ = user;
+			connection_.async_write(user_,
+				boost::bind(&Client::handle_read, this,
 					boost::asio::placeholders::error));
-			break;
-		case 2:
-			connection_.async_read(userWrapper,
-				boost::bind(&Client::handle_connect, this,
-					boost::asio::placeholders::error));
-
-			users_.push_back(userWrapper[AddNewUser]);
-			for (std::size_t i = 0; i < users_.size(); ++i) {
-				cout << users_[i].getUserString() << endl;
-			}
-
-		default:
-			break;
+			input = 0;
 		}
+		else if (input == 2) {
+			test_ = "testing";
+			connection_.async_write(test_,
+				boost::bind(&Client::handle_connect, this,
+					boost::asio::placeholders::error));
+			input = 0;
+		}
+		
 	}
 	else
 	{
 		std::cerr << e.message() << std::endl;
 	}
-
 }
 
 /// Handle completion of a read operation.
@@ -67,6 +56,12 @@ void Client::handle_read(const boost::system::error_code& e)
 	if (!e)
 	{
 		cout << "Read in Client" << endl;
+		manageUser_.insert(user_);
+		Client::handle_connect(e);
+
+		connection_.async_read(users_,
+			boost::bind(&Client::handle_read, this,
+				boost::asio::placeholders::error));
 		
 	}
 	else
@@ -82,6 +77,7 @@ void Client::handle_read_Customers(const boost::system::error_code& e) {
 		for (std::size_t i = 0; i < users_.size(); ++i) {
 			cout << users_[i].getUserString() << endl;
 		}
+		Client::handle_connect(e);
 	}
 	else
 	{
