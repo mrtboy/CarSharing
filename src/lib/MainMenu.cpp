@@ -62,6 +62,7 @@ FUNCTIONTYPE MainMenu::carManagementMenu() {
 	cout << "4. Return Car" << endl;
 	cout << "5. Add new Car" << endl;
 	cout << "6. Find a Car by id" << endl;
+	cout << "7. User info" << endl;
 	cout << "0. Exit" << endl;
 
 	int option = 0;
@@ -86,6 +87,9 @@ FUNCTIONTYPE MainMenu::carManagementMenu() {
 	case 6:
 		return FindCarById();
 		break;
+	case 7:
+		return getCustomerInfo();
+		break;
 	case 0:
 		break;
 
@@ -98,10 +102,10 @@ FUNCTIONTYPE MainMenu::carManagementMenu() {
 
 
 //Customer Management Menu
-void MainMenu::getCustomerInfo() {
-
+FUNCTIONTYPE MainMenu::getCustomerInfo() {
+	cout << "==>User Info<==" << endl;
+	return GETUSERINFO;
 }
-
 User MainMenu::addNewCustomerMenu() {
 	string id = "";
 	string name = "";
@@ -158,6 +162,8 @@ FUNCTIONTYPE MainMenu::FindCarById(){
 	cout << "==>Find car by Id<==" << endl;
 	return FINDCARBYID;
 }
+
+
 
 
 

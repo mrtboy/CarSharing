@@ -22,7 +22,7 @@ public:
 
 	//Customer Management Menu
 	User addNewCustomerMenu();
-	void getCustomerInfo();
+	FUNCTIONTYPE getCustomerInfo();
 
 	//Car Management Menu
 	FUNCTIONTYPE ShowAllCars();

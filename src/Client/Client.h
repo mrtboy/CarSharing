@@ -42,9 +42,18 @@ public:
 	void handle_Return_Car(const boost::system::error_code& e);
 	void handle_Add_New_Car(const boost::system::error_code& e);
 	void handle_Find_Car(const boost::system::error_code& e);
+	void handle_Get_User_Info(const boost::system::error_code& e);
+	
+private:
+
 	void read_Available_Cars(const boost::system::error_code& e);
 	void Show_All_Cars(const boost::system::error_code& e);
-private:
+	void rent_Car(const boost::system::error_code& e);
+	void return_Car(const boost::system::error_code& e);
+	void add_New_Car(const boost::system::error_code& e);
+	void find_Car(const boost::system::error_code& e);
+	void get_User_Info(const boost::system::error_code& e);
+
 	/// The connection to the server.
 	Connection connection_;
 

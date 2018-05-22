@@ -20,6 +20,7 @@ enum FUNCTIONTYPE {
 	RETURN,
 	ADDNEWCAR,
 	FINDCARBYID,
+	GETUSERINFO
 };
 /// The Connection class provides serialization primitives on top of a socket.
 /**
