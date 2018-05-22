@@ -25,23 +25,9 @@ void Client::handle_connect(const boost::system::error_code& e)
 {
 	if (!e)
 	{
-		int input = 0;
-		cin >> input;
-		if (input == 1) {
-			User user{ "1","1",1,"1","1","1" };
-			user_ = user;
-			connection_.async_write(user_,
-				boost::bind(&Client::handle_read, this,
-					boost::asio::placeholders::error));
-			input = 0;
-		}
-		else if (input == 2) {
-			test_ = "testing";
-			connection_.async_write(test_,
-				boost::bind(&Client::handle_connect, this,
-					boost::asio::placeholders::error));
-			input = 0;
-		}
+		connection_.async_read(user_,
+			boost::bind(&Client::handle_read, this,
+				boost::asio::placeholders::error));
 		
 	}
 	else
@@ -55,14 +41,13 @@ void Client::handle_read(const boost::system::error_code& e)
 { 
 	if (!e)
 	{
-		cout << "Read in Client" << endl;
-		manageUser_.insert(user_);
-		Client::handle_connect(e);
+		cout << "Welcome "<<user_.getName() << endl;
 
-		connection_.async_read(users_,
-			boost::bind(&Client::handle_read, this,
+
+
+		connection_.async_write(test_,
+			boost::bind(&Client::handle_write, this,
 				boost::asio::placeholders::error));
-		
 	}
 	else
 	{
@@ -70,24 +55,95 @@ void Client::handle_read(const boost::system::error_code& e)
 		std::cerr << e.message() << std::endl;
 	}
 }
-void Client::handle_read_Customers(const boost::system::error_code& e) {
 
-	if (!e)
-	{
-		for (std::size_t i = 0; i < users_.size(); ++i) {
-			cout << users_[i].getUserString() << endl;
-		}
-		Client::handle_connect(e);
-	}
-	else
-	{
-		// An error occurred.
-		std::cerr << e.message() << std::endl;
-	}
+void Client::handle_Show_All_Cars(const boost::system::error_code& e) {
+	
+	connection_.async_read(test_,
+		boost::bind(&Client::Show_All_Cars, this,
+			boost::asio::placeholders::error));
 }
+
+void Client::Show_All_Cars(const boost::system::error_code& e) {
+	cout << test_ << endl;
+	handle_write(e);
+}
+
+void Client::handle_Show_Available_Cars(const boost::system::error_code& e) {
+	connection_.async_read(test_,
+		boost::bind(&Client::read_Available_Cars, this,
+			boost::asio::placeholders::error));
+	
+}
+
+void Client::read_Available_Cars(const boost::system::error_code& e) {
+	cout << test_ << endl;
+	handle_write(e);
+}
+
+void Client::handle_Rent_Car(const boost::system::error_code& e) {
+	connection_.async_read(test_,
+		boost::bind(&Client::handle_write, this,
+			boost::asio::placeholders::error));
+	cout << test_ << endl;
+}
+
+void Client::handle_Return_Car(const boost::system::error_code& e) {
+	connection_.async_read(test_,
+		boost::bind(&Client::handle_write, this,
+			boost::asio::placeholders::error));
+	cout << test_ << endl;
+}
+void Client::handle_Add_New_Car(const boost::system::error_code& e) {
+	connection_.async_read(test_,
+		boost::bind(&Client::handle_write, this,
+			boost::asio::placeholders::error));
+	cout << test_ << endl;
+}
+void Client::handle_Find_Car(const boost::system::error_code& e) {
+	connection_.async_read(test_,
+		boost::bind(&Client::handle_write, this,
+			boost::asio::placeholders::error));
+	cout << test_ << endl;
+}
+
 void Client::handle_write(const boost::system::error_code& e)
 {
-	
+	functionType_ = mainMenu.carManagementMenu();
+	cout << "write" << endl;
+	switch (functionType_)
+	{
+	case SHOWALLCARS:
+		connection_.async_write(SHOWALLCARS,
+			boost::bind(&Client::handle_Show_All_Cars, this,
+				boost::asio::placeholders::error));
+	case SHOWAVAILABLECARS:
+		connection_.async_write(SHOWAVAILABLECARS,
+			boost::bind(&Client::handle_Show_Available_Cars, this,
+				boost::asio::placeholders::error));
+		break;
+	case RENT:
+		connection_.async_write(RENT,
+			boost::bind(&Client::handle_Rent_Car, this,
+				boost::asio::placeholders::error));
+		break;
+	case RETURN:
+		connection_.async_write(RETURN,
+			boost::bind(&Client::handle_Return_Car, this,
+				boost::asio::placeholders::error));
+		break;
+	case ADDNEWCAR:
+		connection_.async_write(ADDNEWCAR,
+			boost::bind(&Client::handle_Add_New_Car, this,
+				boost::asio::placeholders::error));
+		break;
+	case FINDCARBYID:
+		connection_.async_write(FINDCARBYID,
+			boost::bind(&Client::handle_Find_Car, this,
+				boost::asio::placeholders::error));
+		break;
+	default:
+		break;
+	}
 }
 
 int main(int argc, char* argv[])

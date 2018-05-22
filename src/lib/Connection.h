@@ -13,7 +13,14 @@
 #include <vector>
 #include "libdef.h"
 
-
+enum FUNCTIONTYPE {
+	SHOWALLCARS,
+	SHOWAVAILABLECARS,
+	RENT,
+	RETURN,
+	ADDNEWCAR,
+	FINDCARBYID,
+};
 /// The Connection class provides serialization primitives on top of a socket.
 /**
 * Each message sent using this class consists of:

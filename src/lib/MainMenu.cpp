@@ -54,7 +54,7 @@ void MainMenu::customerManagementMenu() {
 }
 
 //Main Menu
-void MainMenu::carManagementMenu() {
+FUNCTIONTYPE MainMenu::carManagementMenu() {
 	cout << "==> Car Management <==" << endl;
 	cout << "1. Show All cars" << endl;
 	cout << "2. Show available cars" << endl;
@@ -62,31 +62,31 @@ void MainMenu::carManagementMenu() {
 	cout << "4. Return Car" << endl;
 	cout << "5. Add new Car" << endl;
 	cout << "6. Find a Car by id" << endl;
-	cout << "7. Update a Car" << endl;
-	cout << "9. Main Menu" << endl;
 	cout << "0. Exit" << endl;
 
-	char option = '0';
+	int option = 0;
 	cin >> option;
 
 	switch (option) {
-	case '1':
+	case 1:
+		return ShowAllCars();
 		break;
-	case '2':
+	case 2:
+		return ShowAvailableCars();
 		break;
-	case '3':
+	case 3:
+		return RentCar();
 		break;
-	case '4':
+	case 4:
+		return ReturnCar();
 		break;
-	case '5':
+	case 5:
+		return AddNewCar();
 		break;
-	case '6':
+	case 6:
+		return FindCarById();
 		break;
-	case '7':
-		break;
-	case '9':
-		break;
-	case '0':
+	case 0:
 		break;
 
 	default:
@@ -95,21 +95,7 @@ void MainMenu::carManagementMenu() {
 	}
 }
 
-void MainMenu::showAllCarsMenu() {
 
-}
-
-void MainMenu::showAvailableCarMenu() {
-
-}
-
-void MainMenu::rentCatMenu() {
-
-}
-
-void MainMenu::returnCarMenu() {
-
-}
 
 //Customer Management Menu
 void MainMenu::getCustomerInfo() {
@@ -143,7 +129,35 @@ User MainMenu::addNewCustomerMenu() {
 	return user;
 }
 
+FUNCTIONTYPE MainMenu::ShowAllCars() {
+	cout << "==>Show All Cars<==" << endl;
+	return SHOWALLCARS;
+}
 
+FUNCTIONTYPE MainMenu::ShowAvailableCars() {
+	cout << "==>Show Available Cars<==" << endl;
+	return SHOWAVAILABLECARS;
+}
+
+FUNCTIONTYPE MainMenu::RentCar() {
+	cout << "==>Rent Car<==" << endl;
+	return RENT;
+}
+
+FUNCTIONTYPE MainMenu::ReturnCar() {
+	cout << "==>Return a car<==" << endl;
+	return RETURN;
+}
+
+FUNCTIONTYPE MainMenu::AddNewCar() {
+	cout << "==>Add new Car<==" << endl;
+	return ADDNEWCAR;
+}
+
+FUNCTIONTYPE MainMenu::FindCarById(){
+	cout << "==>Find car by Id<==" << endl;
+	return FINDCARBYID;
+}
 
 
 

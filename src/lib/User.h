@@ -23,7 +23,7 @@ private:
 	string phone;
 
 public:
-	User(string, string, int, string, string, string);
+	User(string id, string name, int age, string email, string address, string phone);
 	string getId();
 	string getName();
 	int getAge();

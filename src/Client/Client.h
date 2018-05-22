@@ -36,7 +36,14 @@ public:
 	void handle_read(const boost::system::error_code& e);
 
 	void handle_write(const boost::system::error_code& e);
-	void Client::handle_read_Customers(const boost::system::error_code& e);
+	void handle_Show_All_Cars(const boost::system::error_code& e);
+	void handle_Show_Available_Cars(const boost::system::error_code& e);
+	void handle_Rent_Car(const boost::system::error_code& e);
+	void handle_Return_Car(const boost::system::error_code& e);
+	void handle_Add_New_Car(const boost::system::error_code& e);
+	void handle_Find_Car(const boost::system::error_code& e);
+	void read_Available_Cars(const boost::system::error_code& e);
+	void Show_All_Cars(const boost::system::error_code& e);
 private:
 	/// The connection to the server.
 	Connection connection_;
@@ -54,6 +61,7 @@ private:
 	Wrapper<string>::map_Type messageWrapper;
 	vector<string> container_;
 	string test_;
+	FUNCTIONTYPE functionType_;
 };
 
 #endif

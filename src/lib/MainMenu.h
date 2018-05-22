@@ -13,22 +13,24 @@
 
 using namespace std;
 
-enum FUNCTIONTYPE { AddNewUser, AddNewCar, ShowAllUsers, ShowAddUsers };
-
 class EXPORT_SYMBOL MainMenu {
 
 public:
 	void createMainMenu();
 	void customerManagementMenu();
-	void carManagementMenu();
-	void showAllCarsMenu();
-	void showAvailableCarMenu();
-	void rentCatMenu();
-	void returnCarMenu();
+	FUNCTIONTYPE carManagementMenu();
 
 	//Customer Management Menu
 	User addNewCustomerMenu();
 	void getCustomerInfo();
+
+	//Car Management Menu
+	FUNCTIONTYPE ShowAllCars();
+	FUNCTIONTYPE ShowAvailableCars();
+	FUNCTIONTYPE RentCar();
+	FUNCTIONTYPE ReturnCar();
+	FUNCTIONTYPE AddNewCar();
+	FUNCTIONTYPE FindCarById();
 
 	MainMenu() {};
 	~MainMenu() {};
