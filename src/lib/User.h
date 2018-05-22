@@ -4,6 +4,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/string.hpp>
+#include "boost\serialization\map.hpp"
 #include <iostream>
 #include <sstream>
 #include <utility>
@@ -22,14 +23,14 @@ private:
 	string phone;
 
 public:
-	User(string, string, int, string, string, string);
+	User(string id, string name, int age, string email, string address, string phone);
 	string getId();
 	string getName();
 	int getAge();
 	string getEmail();
 	string getAddress();
 	string getPhone();
-
+	string getUserString();
 
 	void setName(string name);
 	void setAge(int age);
@@ -39,6 +40,7 @@ public:
 
 	User() {};
 	~User() {};
+
 	friend boost::serialization::access;
 
 	template<typename Archive>
