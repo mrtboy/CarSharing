@@ -4,6 +4,11 @@ C++ Advanced Project
 # project dependencies:
 Boost version 1.66
 
+if boost library is not under your C: or E: you need to modify lines in CMakeLists.txt in src path
+
+set(BOOST_ROOT E:/boost_1_66_0)
+set(Header E:/boost_1_66_0/stage/lib)
+
 # How to run?
 build project with cmake
 
