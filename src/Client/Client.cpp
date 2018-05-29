@@ -83,7 +83,6 @@ void Client::handle_Rent_Car(const boost::system::error_code& e) {
 	connection_.async_read(test_,
 		boost::bind(&Client::rent_Car, this,
 			boost::asio::placeholders::error));
-	cout << test_ << endl;
 }
 
 void Client::rent_Car(const boost::system::error_code& e) {
@@ -97,7 +96,6 @@ void Client::handle_Return_Car(const boost::system::error_code& e) {
 	connection_.async_read(test_,
 		boost::bind(&Client::return_Car, this,
 			boost::asio::placeholders::error));
-	cout << test_ << endl;
 }
 void Client::return_Car(const boost::system::error_code& e) {
 	cout << test_ << endl;
@@ -109,7 +107,6 @@ void Client::handle_Add_New_Car(const boost::system::error_code& e) {
 	connection_.async_read(test_,
 		boost::bind(&Client::add_New_Car, this,
 			boost::asio::placeholders::error));
-	cout << test_ << endl;
 }
 
 void Client::add_New_Car(const boost::system::error_code& e) {
@@ -122,7 +119,6 @@ void Client::handle_Find_Car(const boost::system::error_code& e) {
 	connection_.async_read(test_,
 		boost::bind(&Client::find_Car, this,
 			boost::asio::placeholders::error));
-	cout << test_ << endl;
 }
 
 void Client::find_Car(const boost::system::error_code& e) {
