@@ -1,9 +1,7 @@
 ﻿include_directories(${CMAKE_SOURCE_DIR}/lib)
-include_directories(${CMAKE_SOURCE_DIR}/../include)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
-add_library(MenuGenerator MenuGenerator.cpp MenuGenerator.h)
-#add_library(MainMenu MainMenu.cpp MainMenu.h)
 add_executable(Server Server.cpp Server.h)
 
 
