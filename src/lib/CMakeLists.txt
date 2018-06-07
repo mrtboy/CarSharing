@@ -1,25 +1,14 @@
-link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
-include_directories(${CMAKE_SOURCE_DIR}/../include)
+project(CarLibrary)
 
-file(GLOB headers *.h)
-add_library(MainMenu SHARED MainMenu.cpp ${headers})
-add_library(User SHARED User.cpp ${headers})
-add_library(Car SHARED Car.cpp ${headers})
-add_library(ManageUser SHARED ManageUser.cpp ${headers})
-add_library(ManageCar SHARED ManageCar.cpp ${headers})
-add_library(Connection SHARED Connection.cpp ${headers})
-
+add_library(CarLibrary SHARED
+    MainMenu.cpp
+    User.cpp
+    Car.cpp
+    ManageUser.cpp
+    ManageCar.cpp
+    Connection.cpp)
 
 add_definitions(-DEXPMODULE)
 
-# Add source to this project's executable.
-target_link_libraries(MainMenu debug User.dll)
-target_link_libraries(MainMenu optimized User.dll)
-
-target_link_libraries(ManageCar debug Car.dll)
-target_link_libraries(ManageCar optimized Car.dll)
-
-target_link_libraries(ManageUser debug User.dll)
-target_link_libraries(ManageUser optimized User.dll)
-
-# Add source to this project's executable.
+link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+include_directories(${CMAKE_SOURCE_DIR}/../include)
