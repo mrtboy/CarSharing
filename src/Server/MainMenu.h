@@ -2,8 +2,8 @@
 #define MAINMENU_H
 #include <iostream>
 #include <string>
-#include <boost\archive\binary_oarchive.hpp>
-#include <boost\archive\binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
 #include "User.h"
 #include "Connection.h"
 #include "ManageUser.h"
