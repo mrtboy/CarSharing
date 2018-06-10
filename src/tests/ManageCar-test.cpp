@@ -11,6 +11,6 @@ BOOST_AUTO_TEST_CASE(check_constructor)
 	ManageCar manageCar;
 	manageCar.insert(car);
 	
-
+	// Seems to work.
 	BOOST_CHECK_EQUAL(manageCar.reserveCar(123456), true);
 }
