@@ -9,15 +9,16 @@ using namespace std;
 
 class EXPORT_SYMBOL ManageCar {
 public:
-	//bool reserveCar(int id);
+	bool reserveCar(int id);
 	//Car* getCarById(int id);
-	//vector<Car> getAllCars();
+	vector<Car> getAllCars();
 	//vector<Car> getAllReservedCars();
 	//vector<Car> getAllAvailableCars();
 	//Car* getCarByModel(string model);
 	//Car* getCarByLocation(string location);
 	//bool update(Car car);
-	//bool insert(Car car);
+	static vector<Car> cars;
+	bool insert(Car car);
 	//void add(Car car);
 	//void remove(Car car);
 

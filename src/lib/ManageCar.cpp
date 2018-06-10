@@ -2,18 +2,56 @@
 #include <vector>
 #include <algorithm>
 
-//bool ManageCar::update(Car model)
-//{
-//	return;
-//}
-//bool ManageCar::insert(Car model)
-//{
-//	return;
-//}
-//bool ManageCar::reserveCar(int id) {
-//	return;
-//}
-//
+/*
+bool ManageCar::update(Car model)
+{
+
+
+	return;
+}
+
+*/
+
+vector<Car> ManageCar::cars;
+
+vector<Car> ManageCar::getAllCars() {
+	return this->cars;
+}
+
+
+bool ManageCar::insert(Car model)
+{
+
+
+	try {
+
+		cars.push_back(model);
+		return true;
+	}
+	catch (exception ex) {
+		return false;
+	}
+	
+}
+
+
+
+bool ManageCar::reserveCar(int id) {
+
+
+	for (auto &car : cars)
+	{
+		if (car.getID() == id && car.getIsAvailable() == true)
+		{
+			car.setIsAvailable(false);
+			return true;
+		}
+	}
+	return false;
+
+
+}
+
 //Car* ManageCar::getCarById(int id)
 //{
 //	return NULL;

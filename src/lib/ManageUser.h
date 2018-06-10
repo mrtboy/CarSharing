@@ -11,6 +11,7 @@ using namespace std;
 class EXPORT_SYMBOL ManageUser {
 public:
 	bool userExist(string userId);
+
 	bool insert(User model);
 
 	vector<User> getAllUsers();

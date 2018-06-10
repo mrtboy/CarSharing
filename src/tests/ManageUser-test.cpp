@@ -2,6 +2,7 @@
 
 #include "ManageUser.h"
 #include "User.h"
+#include "../lib/ManageUser.h"
 
 BOOST_AUTO_TEST_CASE(check_constructor)
 {

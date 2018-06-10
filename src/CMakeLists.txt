@@ -11,8 +11,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/../bin")
 
 if(WIN32)
 
-	set(BOOST_ROOT E:/boost_1_66_0)
-	set(Boost_INCLUDE_DIRS E:/boost_1_66_0/stage/lib)
+	set(BOOST_ROOT C:/boost_1_66_0)
+	set(Boost_INCLUDE_DIRS C:/boost_1_66_0/stage/lib)
 
 	set(BOOST_USE_STATIC_LIBS OFF)
 	set(Boost_USE_MULTITHREADED ON)
