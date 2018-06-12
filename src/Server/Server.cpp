@@ -1,5 +1,6 @@
 #include "Server.h"
 #include <boost/foreach.hpp>
+#include "ManageCar.h"
 
 Server::Server(boost::asio::io_service& io_service, unsigned short port)
 	: acceptor_(io_service,
@@ -88,9 +89,16 @@ void Server::handle_Return_Car(const boost::system::error_code& e, connection_pt
 void Server::handle_Add_New_Car(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Add_New_Car";
 	cout << test_ << endl;
-	conn->async_write(test_,
-		boost::bind(&Server::handle_write, this,
+	conn->async_read(car_,
+		boost::bind(&Server::Add_New_Car, this,
 			boost::asio::placeholders::error, conn));
+}
+
+void Server::Add_New_Car(const boost::system::error_code& e, connection_ptr conn) {
+	ManageCar manageCar;
+	manageCar.insert(car_);
+	cout << car_.getModel() << endl;
+	handle_write(e, conn);
 }
 
 //Find Car

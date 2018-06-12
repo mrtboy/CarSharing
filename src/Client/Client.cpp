@@ -104,14 +104,51 @@ void Client::return_Car(const boost::system::error_code& e) {
 
 //Add New Car
 void Client::handle_Add_New_Car(const boost::system::error_code& e) {
-	connection_.async_read(test_,
-		boost::bind(&Client::add_New_Car, this,
-			boost::asio::placeholders::error));
-}
-
-void Client::add_New_Car(const boost::system::error_code& e) {
 	cout << test_ << endl;
-	handle_write(e);
+	string owner;
+	int price;
+	string location;
+	int id;
+	string model;
+	int year;
+	string engine;
+	int NoOfDoors;
+	int seats;
+	string transmission;
+	string consumption;
+	string type;
+	bool isAvailable;
+
+	cout << "Id: " << endl;
+	cin >> id;
+	cout << "Owner Name: " << endl;
+	cin >> owner;
+	cout << "price: " << endl;
+	cin >> price;
+	cout << "location: " << endl;
+	cin >> location;
+	cout << "model: " << endl;
+	cin >> model;
+	cout << "year: " << endl;
+	cin >> year;
+	cout << "engine: " << endl;
+	cin >> engine;
+	cout << "NoOfDoors: " << endl;
+	cin >> NoOfDoors;
+	cout << "seats: " << endl;
+	cin >> seats;
+	cout << "transmission: " << endl;
+	cin >> transmission;
+	cout << "consumption: " << endl;
+	cin >> consumption;
+	cout << "type: " << endl;
+	cin >> type;
+
+	Car car{ owner, price, location, id, model, year, engine, NoOfDoors, seats, transmission, consumption, type,true };
+
+	connection_.async_write(car,
+		boost::bind(&Client::handle_write, this,
+			boost::asio::placeholders::error));
 }
 
 //Find Car by ID
