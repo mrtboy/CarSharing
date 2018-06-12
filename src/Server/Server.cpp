@@ -18,25 +18,6 @@ Server::Server(boost::asio::io_service& io_service, unsigned short port)
 	manageUser.insert(user4);
 	manageUser.insert(user5);
 
-	Car car1{ "Reza1",35001,"Kiel",123456,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
-	Car car2{ "Reza2",35002,"Kiel",123456,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
-	Car car3{ "Reza3",35003,"Kiel",123456,"VW",2018,"Diesel",5,5,"?","6","Benzin",true };
-	Car car4{ "Reza4",35004,"Kiel",123456,"VW",2018,"Diesel",5,5,"?","6","Benzin",true };
-	Car car5{ "Reza5",35005,"Kiel",123456,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
-	
-	
-	ManageCar manageCar;
-
-	manageCar.insert(car1);
-	manageCar.insert(car2);
-	manageCar.insert(car3);
-	manageCar.insert(car4);
-	manageCar.insert(car5);
-	
-	
-
-
-
 
 
 
