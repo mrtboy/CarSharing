@@ -19,6 +19,16 @@ Server::Server(boost::asio::io_service& io_service, unsigned short port)
 	manageUser.insert(user5);
 
 
+	Car car1{ "Reza1",3500,"Kiel",123456,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
+	Car car2{ "Reza2",5000,"Kiel",123456,"VW",2018,"Diesel",5,5,"?","6","Benzin",true };
+
+	ManageCar manageCar;
+	manageCar.insert(car1);
+	manageCar.insert(car2);
+
+
+
+
 
 
 	// Start an accept operation for a new connection.
@@ -60,6 +70,19 @@ void Server::handle_Show_All_Cars(const boost::system::error_code& e, connection
 		boost::bind(&Server::handle_write, this,
 			boost::asio::placeholders::error, conn));
 }
+
+
+void Server::ShowAllCars(const boost::system::error_code& e, connection_ptr conn) {
+	ManageCar manageCar;
+	manageCar.getAllCars();
+	
+	handle_write(e, conn);
+}
+
+
+
+
+
 
 //send Available cars
 void Server::handle_Show_Available_Cars(const boost::system::error_code& e, connection_ptr conn) {
@@ -103,6 +126,10 @@ void Server::Add_New_Car(const boost::system::error_code& e, connection_ptr conn
 	cout << car_.getModel() << endl;
 	handle_write(e, conn);
 }
+
+
+
+
 
 //Find Car
 void Server::handle_Find_Car(const boost::system::error_code& e, connection_ptr conn) {

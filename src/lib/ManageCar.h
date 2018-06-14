@@ -19,7 +19,7 @@ public:
 	//bool update(Car car);
 	static vector<Car> cars;
 	bool insert(Car car);
-	//void add(Car car);
+	
 	//void remove(Car car);
 
 	ManageCar() {} ;
