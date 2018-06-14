@@ -1,15 +1,11 @@
-#define BOOST_TEST_MAIN
+#include <boost/test/unit_test.hpp>
 
-#include "main.h"
+#include <boost/test/unit_test.hpp>
+#include "../lib/ManageCar.h"
+#include "../lib/Car.h"
+#include <boost/asio/basic_socket_iostream.hpp>
 
-BOOST_AUTO_TEST_SUITE(adder_test_suite);
-BOOST_AUTO_TEST_CASE(check_constructor)
-{
-	User user{ "Reza","test",31,"test","test","test" };
-	ManageUser manageUser;
-	manageUser.insert(user);
-	BOOST_CHECK_EQUAL(manageUser.userExist("test"), false);
-}
+
 
 
 BOOST_AUTO_TEST_CASE(testManageCar)
@@ -17,12 +13,10 @@ BOOST_AUTO_TEST_CASE(testManageCar)
 	Car car1{ "Reza1",3500,"Kiel",1,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
 	;
 	ManageCar manageCar;
-
-
 	manageCar.insert(car1);
-
-
-	std::string expected_value1 = "REZA1";
+	
+	
+	std::string expected_value1 = "REZA";
 	int expected_value2 = 3500;
 	std::string expected_value3 = "Kiel";
 	int expected_value4 = 1;
@@ -50,13 +44,16 @@ BOOST_AUTO_TEST_CASE(testManageCar)
 	BOOST_CHECK(expected_value11 == car1.getConsumption());
 	BOOST_CHECK(expected_value12 == car1.getType());
 	BOOST_CHECK(expected_value13 == car1.getIsAvailable());
-	BOOST_REQUIRE(manageCar.reserveCar(expected_value4) == true);
-	BOOST_REQUIRE(manageCar.insert(car1) == true);
-	
 
-	
+
+
 
 }
 
 
-BOOST_AUTO_TEST_SUITE_END();
+
+
+	
+	
+
+	

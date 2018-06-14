@@ -1,5 +1,6 @@
 #include "Server.h"
 #include <boost/foreach.hpp>
+#include "ManageCar.h"
 
 Server::Server(boost::asio::io_service& io_service, unsigned short port)
 	: acceptor_(io_service,
@@ -16,6 +17,14 @@ Server::Server(boost::asio::io_service& io_service, unsigned short port)
 	manageUser.insert(user3);
 	manageUser.insert(user4);
 	manageUser.insert(user5);
+
+
+	Car car1{ "Reza1",3500,"Kiel",1,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
+	Car car2{ "Reza2",5000,"Kiel",2,"VW",2018,"Diesel",5,5,"?","6","Benzin",true };
+
+	ManageCar manageCar;
+	manageCar.insert(car1);
+	manageCar.insert(car2);
 
 	// Start an accept operation for a new connection.
 	connection_ptr new_conn(new Connection(acceptor_.get_io_service()));
@@ -47,16 +56,9 @@ void Server::handle_accept(const boost::system::error_code& e, connection_ptr co
 			boost::asio::placeholders::error, new_conn));
 }
 
-//send All cars
-void Server::handle_Show_All_Cars(const boost::system::error_code& e, connection_ptr conn) {
-	test_ = "handle_Show_All_Cars";
-	cout << test_ << endl;
 
-	conn->async_write(test_,
-		boost::bind(&Server::handle_write, this,
-			boost::asio::placeholders::error, conn));
-}
 
+/*
 //send Available cars
 void Server::handle_Show_Available_Cars(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Show_Available_Cars";
@@ -64,44 +66,48 @@ void Server::handle_Show_Available_Cars(const boost::system::error_code& e, conn
 	conn->async_write(test_,
 		boost::bind(&Server::handle_write, this,
 			boost::asio::placeholders::error, conn));
-}
-
+}*/
+/**/
 //Rent car for user
 void Server::handle_Rent_Car(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Rent_Car";
 	cout << test_ << endl;
-	conn->async_write(test_,
-		boost::bind(&Server::handle_write, this,
-			boost::asio::placeholders::error, conn));
+	manageCar_.reserveCar(carID_);
+	handle_write(e, conn);
 }
 
 //Return Car
 void Server::handle_Return_Car(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Return_Car";
-	cout << test_ << endl;
-	conn->async_write(test_,
-		boost::bind(&Server::handle_write, this,
-			boost::asio::placeholders::error, conn));
+	manageCar_.returnCar(carID_);
+	handle_write(e, conn);
 }
 
 //Add new Car
 void Server::handle_Add_New_Car(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Add_New_Car";
 	cout << test_ << endl;
-	conn->async_write(test_,
-		boost::bind(&Server::handle_write, this,
+
+	conn->async_read(car_,
+		boost::bind(&Server::Add_New_Car, this,
 			boost::asio::placeholders::error, conn));
 }
 
+void Server::Add_New_Car(const boost::system::error_code& e, connection_ptr conn) {
+	ManageCar manageCar;
+	manageCar.insert(car_);
+	cout << car_.getModel() << endl;
+	handle_write(e, conn);
+}
+
+/*
 //Find Car
 void Server::handle_Find_Car(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Find_Car";
-	cout << test_ << endl;
-	conn->async_write(test_,
-		boost::bind(&Server::handle_write, this,
-			boost::asio::placeholders::error, conn));
+	manageCar_.getCarByID(findID_);
+	handle_write(e, conn);
 }
-
+*/
 //Handle Get User Info
 void Server::handle_Get_User_Info(const boost::system::error_code& e, connection_ptr conn) {
 
@@ -116,25 +122,31 @@ void Server::handle_read(const boost::system::error_code& e, connection_ptr conn
 		{
 		case SHOWALLCARS:
 			cout << "SHOWALLCARS" << endl;
-			conn->async_write(test_,
-				boost::bind(&Server::handle_Show_All_Cars, this,
+			conn->async_write(manageCar_.cars,
+				boost::bind(&Server::handle_write, this,
 					boost::asio::placeholders::error, conn));
 			break;
 		case SHOWAVAILABLECARS:
 			cout << "SHOWAVAILABLECARS" << endl;
-			conn->async_write(test_,
-				boost::bind(&Server::handle_Show_Available_Cars, this,
+			conn->async_write(manageCar_.getAllAvailableCars(),
+				boost::bind(&Server::handle_write, this,
 					boost::asio::placeholders::error, conn));
 			break;
+		/*case SHOWRESERVEDCARS:
+			cout << "SHOWRESERVEDCARS" << endl;
+			conn->async_write(manageCar_.getAllReservedCars(),
+				boost::bind(&Server::handle_write, this,
+					boost::asio::placeholders::error, conn));
+			break;*/
 		case RENT:
 			cout << "RENT" << endl;
-			conn->async_write(test_,
+			conn->async_read(carID_,
 				boost::bind(&Server::handle_Rent_Car, this,
 					boost::asio::placeholders::error, conn));
 			break;
 		case RETURN:
 			cout << "RETURN" << endl;
-			conn->async_write(test_,
+			conn->async_write(carID_,
 				boost::bind(&Server::handle_Return_Car, this,
 					boost::asio::placeholders::error, conn));
 			break;
@@ -146,8 +158,8 @@ void Server::handle_read(const boost::system::error_code& e, connection_ptr conn
 			break;
 		case FINDCARBYID:
 			cout << "FINDCARBYID" << endl;
-			conn->async_write(test_,
-				boost::bind(&Server::handle_Find_Car, this,
+			conn->async_write(manageCar_.getCarByID(findID_),
+				boost::bind(&Server::handle_write, this,
 					boost::asio::placeholders::error, conn));
 			break;
 		case GETUSERINFO:

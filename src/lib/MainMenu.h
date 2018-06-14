@@ -27,6 +27,7 @@ public:
 	//Car Management Menu
 	FUNCTIONTYPE ShowAllCars();
 	FUNCTIONTYPE ShowAvailableCars();
+	//FUNCTIONTYPE ShowReservedCars();
 	FUNCTIONTYPE RentCar();
 	FUNCTIONTYPE ReturnCar();
 	FUNCTIONTYPE AddNewCar();

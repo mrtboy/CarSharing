@@ -64,6 +64,7 @@ FUNCTIONTYPE MainMenu::carManagementMenu() {
 	cout << "6. Find a Car by id" << endl;
 	cout << "7. User info" << endl;
 	cout << "0. Exit" << endl;
+//	cout << "8. Show reserved cars" << endl;
 
 	int option = 0;
 	cin >> option;
@@ -92,6 +93,9 @@ FUNCTIONTYPE MainMenu::carManagementMenu() {
 		break;
 	case 0:
 		break;
+/*	case 8:
+		return ShowReservedCars();
+		break;*/
 
 	default:
 		break;
@@ -142,6 +146,13 @@ FUNCTIONTYPE MainMenu::ShowAvailableCars() {
 	cout << "==>Show Available Cars<==" << endl;
 	return SHOWAVAILABLECARS;
 }
+/*
+FUNCTIONTYPE MainMenu::ShowReservedCars() {
+	cout << "==>Show Reserved Cars<==" << endl;
+	return SHOWRESERVEDCARS;
+}*/
+
+
 
 FUNCTIONTYPE MainMenu::RentCar() {
 	cout << "==>Rent Car<==" << endl;

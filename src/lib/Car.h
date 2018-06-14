@@ -45,7 +45,9 @@ public:
 	string getTransmission();
 	string getConsumption();
 	string getType();
+	string getCarsString();
 	bool getIsAvailable();
+	
 	
 
 	void setNoOfDoors(int NoOfDoors);
@@ -61,6 +63,7 @@ public:
 	void setLocation(string location);
 	void setOwner(string owner);
 	void setPrice(int price);
+	
 
 	Car() {};
 	~Car() {};

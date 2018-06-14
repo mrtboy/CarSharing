@@ -1,5 +1,6 @@
 #include "Client.h"
 #include "boost\serialization\map.hpp"
+#include "ManageCar.h"
 
 
 Client::Client(boost::asio::io_service& io_service,
@@ -54,75 +55,175 @@ void Client::handle_read(const boost::system::error_code& e)
 //Show All Cars
 void Client::handle_Show_All_Cars(const boost::system::error_code& e) {
 	
-	connection_.async_read(test_,
+	
+
+	connection_.async_read(cars_,
 		boost::bind(&Client::Show_All_Cars, this,
 			boost::asio::placeholders::error));
 }
 
 void Client::Show_All_Cars(const boost::system::error_code& e) {
-	cout << test_ << endl;
+	
+	cout << "Show ALLCars" << endl;
+
+	for (auto &car : cars_)
+	{
+		cout << car.getCarsString() << endl;
+	}
+	
+
 	handle_write(e);
 }
 
+
 //Show Available Cars
 void Client::handle_Show_Available_Cars(const boost::system::error_code& e) {
-	connection_.async_read(test_,
+	connection_.async_read(cars_,
 		boost::bind(&Client::read_Available_Cars, this,
 			boost::asio::placeholders::error));
 	
 }
 
 void Client::read_Available_Cars(const boost::system::error_code& e) {
-	cout << test_ << endl;
+	
+	cout << "Show Availabe Cars" << endl;
+	
+	for (auto &car : cars_)
+	{
+		cout << car.getCarsString() <<endl;
+	}
+	cout << endl;
 	handle_write(e);
 }
+/*
+//Show Reserved Cars
+void Client::handle_Show_Reserved_Cars(const boost::system::error_code& e) {
+	connection_.async_read(cars_,
+		boost::bind(&Client::read_Reserved_Cars, this,
+			boost::asio::placeholders::error));
 
+}
 
+void Client::read_Reserved_Cars(const boost::system::error_code& e) {
+
+	cout << "Show Reserved Cars" << endl;
+
+	for (auto &car : cars_)
+	{
+		cout << car.getCarsString() << endl;
+	}
+	cout << endl;
+	handle_write(e);
+}
+*/
 //Rent Car
 void Client::handle_Rent_Car(const boost::system::error_code& e) {
-	connection_.async_read(test_,
+
+	int carID = 0;
+	cout << "Please give in CarID to rent it !: ";
+	cin >> carID;
+	
+	connection_.async_write(carID,
 		boost::bind(&Client::rent_Car, this,
 			boost::asio::placeholders::error));
 }
 
 void Client::rent_Car(const boost::system::error_code& e) {
 	cout << test_ << endl;
+	//manageCar_.reserveCar(car_.getID());
 	handle_write(e);
 }
 
 
 //Return Car
 void Client::handle_Return_Car(const boost::system::error_code& e) {
-	connection_.async_read(test_,
+	int carID = 0;
+	cout << "Please give in CarID to return it !: ";
+	cin >> carID;
+
+	connection_.async_write(carID,
 		boost::bind(&Client::return_Car, this,
 			boost::asio::placeholders::error));
 }
 void Client::return_Car(const boost::system::error_code& e) {
 	cout << test_ << endl;
+	//manageCar_.returnCar(car_.getID());
 	handle_write(e);
 }
 
 //Add New Car
 void Client::handle_Add_New_Car(const boost::system::error_code& e) {
-	connection_.async_read(test_,
-		boost::bind(&Client::add_New_Car, this,
-			boost::asio::placeholders::error));
-}
-
-void Client::add_New_Car(const boost::system::error_code& e) {
 	cout << test_ << endl;
-	handle_write(e);
+	string owner;
+	int price;
+	string location;
+	int id;
+	string model;
+	int year;
+	string engine;
+	int NoOfDoors;
+	int seats;
+	string transmission;
+	string consumption;
+	string type;
+	bool isAvailable;
+
+	cout << "Id: " << endl;
+	cin >> id;
+	cout << "Owner Name: " << endl;
+	cin >> owner;
+	cout << "price: " << endl;
+	cin >> price;
+	cout << "location: " << endl;
+	cin >> location;
+	cout << "model: " << endl;
+	cin >> model;
+	cout << "year: " << endl;
+	cin >> year;
+	cout << "engine: " << endl;
+	cin >> engine;
+	cout << "NoOfDoors: " << endl;
+	cin >> NoOfDoors;
+	cout << "seats: " << endl;
+	cin >> seats;
+	cout << "transmission: " << endl;
+	cin >> transmission;
+	cout << "consumption: " << endl;
+	cin >> consumption;
+	cout << "type: " << endl;
+	cin >> type;
+
+	Car car{ owner, price, location, id, model, year, engine, NoOfDoors, seats, transmission, consumption, type,true };
+
+	connection_.async_write(car,
+		boost::bind(&Client::handle_write, this,
+			boost::asio::placeholders::error));
 }
 
 //Find Car by ID
 void Client::handle_Find_Car(const boost::system::error_code& e) {
-	connection_.async_read(test_,
+	int carID = 0;
+	cout << "Please give in CarID to find !: ";
+	cin >> carID;
+
+	connection_.async_write(carID,
+		boost::bind(&Client::handle_Find_Car_2, this,
+			boost::asio::placeholders::error));
+	
+}
+
+void Client::handle_Find_Car_2(const boost::system::error_code& e) {
+	connection_.async_read(*findCar,
 		boost::bind(&Client::find_Car, this,
 			boost::asio::placeholders::error));
+
 }
 
 void Client::find_Car(const boost::system::error_code& e) {
-	cout << test_ << endl;
+	cout << "find Cars" << endl;
+	//cout << findCar->getID();
+	Car fCar = *findCar;
+	fCar.getCarsString();
 	handle_write(e);
 
 }
@@ -149,11 +250,17 @@ void Client::handle_write(const boost::system::error_code& e)
 		connection_.async_write(SHOWALLCARS,
 			boost::bind(&Client::handle_Show_All_Cars, this,
 				boost::asio::placeholders::error));
+		break;
 	case SHOWAVAILABLECARS:
 		connection_.async_write(SHOWAVAILABLECARS,
 			boost::bind(&Client::handle_Show_Available_Cars, this,
 				boost::asio::placeholders::error));
 		break;
+	/*case SHOWRESERVEDCARS:
+		connection_.async_write(SHOWRESERVEDCARS,
+			boost::bind(&Client::handle_Show_Reserved_Cars, this,
+				boost::asio::placeholders::error));
+		break;*/
 	case RENT:
 		connection_.async_write(RENT,
 			boost::bind(&Client::handle_Rent_Car, this,
