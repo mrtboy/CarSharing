@@ -65,16 +65,13 @@ void Server::handle_accept(const boost::system::error_code& e, connection_ptr co
 void Server::handle_Show_All_Cars(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Show_All_Cars";
 	cout << test_ << endl;
-	
-	 
+
+	/*
 	conn->async_write(manageCar_.cars,
 		boost::bind(&Server::handle_write, this,
-			boost::asio::placeholders::error, conn));
+			boost::asio::placeholders::error, conn)); */
+	
 }
-
-
-
-
 
 
 
