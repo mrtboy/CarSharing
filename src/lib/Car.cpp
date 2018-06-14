@@ -136,4 +136,12 @@ int Car::getPrice() {
 	return this->price;	
 }
 
+string Car::getCarsString() {
+	
+	
+
+	return "Owner" + owner + "Price:" + to_string(price);
+
+}
+
 	

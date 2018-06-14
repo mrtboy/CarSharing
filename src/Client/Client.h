@@ -12,6 +12,7 @@
 #include "Car.h"
 #include "ManageUser.h"
 #include "Container.h"
+#include "ManageCar.h"
 
 using namespace std;
 
@@ -61,6 +62,8 @@ private:
 	std::vector<User> users_;
 	//std::vector<Car> car_;
 	ManageUser manageUser_;
+	ManageCar manageCar_;
+	vector<Car> cars_;
 	std::vector<string> menu_;
 	char option_ = ' ';
 	User user_;

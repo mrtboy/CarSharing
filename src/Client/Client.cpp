@@ -55,7 +55,7 @@ void Client::handle_read(const boost::system::error_code& e)
 //Show All Cars
 void Client::handle_Show_All_Cars(const boost::system::error_code& e) {
 	
-	ManageCar manageCar_;
+	
 
 	connection_.async_read(manageCar_.cars,
 		boost::bind(&Client::Show_All_Cars, this,
@@ -63,8 +63,16 @@ void Client::handle_Show_All_Cars(const boost::system::error_code& e) {
 }
 
 void Client::Show_All_Cars(const boost::system::error_code& e) {
-	ManageCar manageCar_;
-	cout << manageCar_.getAllCars()<< endl;
+	
+
+	cout << "Show ALLCars" << endl;
+
+	for (auto &car : manageCar_.cars)
+	{
+		cout << car.getCarsString() << endl;
+	}
+	
+
 	handle_write(e);
 }
 

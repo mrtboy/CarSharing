@@ -65,8 +65,9 @@ void Server::handle_accept(const boost::system::error_code& e, connection_ptr co
 void Server::handle_Show_All_Cars(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Show_All_Cars";
 	cout << test_ << endl;
-	ManageCar manageCar_;
-	conn->async_write(manageCar_.getAllCars(),
+	
+	 
+	conn->async_write(manageCar_.cars,
 		boost::bind(&Server::handle_write, this,
 			boost::asio::placeholders::error, conn));
 }
@@ -148,7 +149,7 @@ void Server::handle_read(const boost::system::error_code& e, connection_ptr conn
 		{
 		case SHOWALLCARS:
 			cout << "SHOWALLCARS" << endl;
-			conn->async_write(test_,
+			conn->async_write(manageCar_.cars,
 				boost::bind(&Server::handle_Show_All_Cars, this,
 					boost::asio::placeholders::error, conn));
 			break;
