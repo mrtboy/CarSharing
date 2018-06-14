@@ -138,9 +138,6 @@ int Car::getPrice() {
 
 string Car::getCarsString() {
 	
-	
-
-
 	return "Owner: " + owner + " Price: " + to_string(price) + " Location: " + location + " ID: " + to_string(id) + " Available: " + to_string(isAvailable);
 
 }

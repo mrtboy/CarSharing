@@ -78,14 +78,21 @@ void Client::Show_All_Cars(const boost::system::error_code& e) {
 
 //Show Available Cars
 void Client::handle_Show_Available_Cars(const boost::system::error_code& e) {
-	connection_.async_read(test_,
+	connection_.async_read(cars_,
 		boost::bind(&Client::read_Available_Cars, this,
 			boost::asio::placeholders::error));
 	
 }
 
 void Client::read_Available_Cars(const boost::system::error_code& e) {
-	cout << test_ << endl;
+	
+	cout << "Show Availabe Cars" << endl;
+	
+	for (auto &car : cars_)
+	{
+		cout << car.getCarsString() <<endl;
+	}
+	cout << endl;
 	handle_write(e);
 }
 

@@ -58,7 +58,7 @@ void Server::handle_accept(const boost::system::error_code& e, connection_ptr co
 
 
 
-
+/*
 //send Available cars
 void Server::handle_Show_Available_Cars(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Show_Available_Cars";
@@ -66,7 +66,7 @@ void Server::handle_Show_Available_Cars(const boost::system::error_code& e, conn
 	conn->async_write(test_,
 		boost::bind(&Server::handle_write, this,
 			boost::asio::placeholders::error, conn));
-}
+}*/
 
 //Rent car for user
 void Server::handle_Rent_Car(const boost::system::error_code& e, connection_ptr conn) {
@@ -135,8 +135,8 @@ void Server::handle_read(const boost::system::error_code& e, connection_ptr conn
 			break;
 		case SHOWAVAILABLECARS:
 			cout << "SHOWAVAILABLECARS" << endl;
-			conn->async_write(test_,
-				boost::bind(&Server::handle_Show_Available_Cars, this,
+			conn->async_write(manageCar_.getAllAvailableCars(),
+				boost::bind(&Server::handle_write, this,
 					boost::asio::placeholders::error, conn));
 			break;
 		case RENT:
