@@ -5,11 +5,11 @@ Server::Server(boost::asio::io_service& io_service, unsigned short port)
 	: acceptor_(io_service,
 		boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
 {
-	User user1{ "1", "Reza", 32, "Mohammadreza@gmail.com", "Kiel", "017856556" };
-	User user2{ "2", "Ali", 20, "Ali@gmail.com", "Koln", "017432432" };
-	User user3{ "3", "Jack", 43, "Jack@gmail.com", "Essen", "01765464" };
-	User user4{ "4", "Muller", 33, "Muller@gmail.com", "Berlin", "0142325" };
-	User user5{ "5", "Peter", 23, "Peter@gmail.com", "Kiel", "015455346" };
+	User user1{ "1", "Reza", 32, "017856556", "Kiel", "Mohammadreza@gmail.com" };
+	User user2{ "2", "Ali", 20, "017432432", "Koln", "Ali@gmail.com" };
+	User user3{ "3", "Jack", 43, "01765464", "Essen", "Jack@gmail.com" };
+	User user4{ "4", "Muller", 33, "0142325", "Berlin", "Muller@gmail.com" };
+	User user5{ "5", "Peter", 23, "015455346", "Kiel", "Peter@gmail.com" };
 
 	manageUser.insert(user1);
 	manageUser.insert(user2);
