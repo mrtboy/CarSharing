@@ -39,15 +39,18 @@ public:
 	void handle_write(const boost::system::error_code& e);
 	void handle_Show_All_Cars(const boost::system::error_code& e);
 	void handle_Show_Available_Cars(const boost::system::error_code& e);
+	void handle_Show_Reserved_Cars(const boost::system::error_code& e);
 	void handle_Rent_Car(const boost::system::error_code& e);
 	void handle_Return_Car(const boost::system::error_code& e);
 	void handle_Add_New_Car(const boost::system::error_code& e);
 	void handle_Find_Car(const boost::system::error_code& e);
+	void handle_Find_Car_2(const boost::system::error_code& e);
 	void handle_Get_User_Info(const boost::system::error_code& e);
 	
 private:
 
 	void read_Available_Cars(const boost::system::error_code& e);
+	void read_Reserved_Cars(const boost::system::error_code& e);
 	void Show_All_Cars(const boost::system::error_code& e);
 	void rent_Car(const boost::system::error_code& e);
 	void return_Car(const boost::system::error_code& e);
@@ -67,6 +70,7 @@ private:
 	std::vector<string> menu_;
 	char option_ = ' ';
 	User user_;
+	std :: unique_ptr<Car> findCar;
 	Car car_;
 	MainMenu mainMenu;
 	Wrapper<User>::map_Type userWrapper;

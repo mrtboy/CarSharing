@@ -10,7 +10,8 @@ using namespace std;
 class EXPORT_SYMBOL ManageCar {
 public:
 	bool reserveCar(int id);
-	Car* getCarById(int id); 
+	bool returnCar(int id);
+	Car* getCarByID(int id); 
 	vector<Car> getAllCars();
 	vector<Car> getAllReservedCars();
 	vector<Car> getAllAvailableCars();

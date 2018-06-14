@@ -55,6 +55,22 @@ bool ManageCar::reserveCar(int id) {
 
 }
 
+bool ManageCar::returnCar(int id) {
+
+
+	for (auto &car : cars)
+	{
+		if (car.getID() == id && car.getIsAvailable() == false)
+		{
+			car.setIsAvailable(true);
+			return true;
+		}
+	}
+	return false;
+
+
+}
+
 vector<Car> ManageCar::update_cars;
 void ManageCar::remove(Car r_car) {
 	for (auto &car : cars)
@@ -84,7 +100,7 @@ vector<Car> ManageCar::available_Cars;
 vector<Car> ManageCar::getAllAvailableCars() {
 	for (auto &car : cars)
 	{
-		cout << car.getID();
+		//cout << car.getID();
 		if (car.getIsAvailable() == true)
 		{
 			available_Cars.push_back(car);
@@ -97,6 +113,17 @@ Car* ManageCar::getCarByModel(string model) {
 	for (auto &car : cars)
 	{
 		if (car.getModel() == model)
+		{
+			return &car;
+		}
+	}
+	return NULL;
+}
+
+Car* ManageCar::getCarByID(int ID) {
+	for (auto &car : cars)
+	{
+		if (car.getID() == ID)
 		{
 			return &car;
 		}
