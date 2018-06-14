@@ -64,7 +64,6 @@ void Client::handle_Show_All_Cars(const boost::system::error_code& e) {
 
 void Client::Show_All_Cars(const boost::system::error_code& e) {
 	
-
 	cout << "Show ALLCars" << endl;
 
 	for (auto &car : manageCar_.cars)
@@ -199,6 +198,7 @@ void Client::handle_write(const boost::system::error_code& e)
 		connection_.async_write(SHOWALLCARS,
 			boost::bind(&Client::handle_Show_All_Cars, this,
 				boost::asio::placeholders::error));
+		break;
 	case SHOWAVAILABLECARS:
 		connection_.async_write(SHOWAVAILABLECARS,
 			boost::bind(&Client::handle_Show_Available_Cars, this,
