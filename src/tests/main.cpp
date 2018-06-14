@@ -2,27 +2,25 @@
 
 #include "main.h"
 
-BOOST_AUTO_TEST_SUITE(adder_test_suite);
-BOOST_AUTO_TEST_CASE(check_constructor)
+BOOST_AUTO_TEST_CASE(CheckUserAdded)
 {
-	User user{ "Reza","test",31,"test","test","test" };
+	User user{ "Id","test",31,"test","test","test"};
 	ManageUser manageUser;
 	manageUser.insert(user);
-	BOOST_CHECK_EQUAL(manageUser.userExist("test"), false);
+	BOOST_CHECK_EQUAL(manageUser.userExist("Id"), true);
 }
 
 
 BOOST_AUTO_TEST_CASE(testManageCar)
 {
-	Car car1{ "Reza1",3500,"Kiel",1,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
-	;
+	Car car1{ "User1",3500,"Kiel",1,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
+	
 	ManageCar manageCar;
-
 
 	manageCar.insert(car1);
 
 
-	std::string expected_value1 = "REZA1";
+	std::string expected_value1 = "User1";
 	int expected_value2 = 3500;
 	std::string expected_value3 = "Kiel";
 	int expected_value4 = 1;
@@ -57,6 +55,3 @@ BOOST_AUTO_TEST_CASE(testManageCar)
 	
 
 }
-
-
-BOOST_AUTO_TEST_SUITE_END();
