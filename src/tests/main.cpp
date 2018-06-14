@@ -49,13 +49,14 @@ BOOST_AUTO_TEST_CASE(testManageCar)
 	BOOST_CHECK(expected_value10 == car1.getTransmission());
 	BOOST_CHECK(expected_value11 == car1.getConsumption());
 	BOOST_CHECK(expected_value12 == car1.getType());
-	//BOOST_CHECK(expected_value13 == car1.getIsAvailable());
-	BOOST_REQUIRE(car1.getIsAvailable());
+	BOOST_CHECK(expected_value13 == car1.getIsAvailable());
+	BOOST_REQUIRE(manageCar.reserveCar(expected_value4) == true);
+	BOOST_REQUIRE(manageCar.insert(car1) == true);
+	
+
+	
 
 }
-
-
-
 
 
 BOOST_AUTO_TEST_SUITE_END();
