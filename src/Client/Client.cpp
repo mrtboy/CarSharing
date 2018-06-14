@@ -1,5 +1,6 @@
 #include "Client.h"
 #include "boost\serialization\map.hpp"
+#include "ManageCar.h"
 
 
 Client::Client(boost::asio::io_service& io_service,
@@ -54,14 +55,16 @@ void Client::handle_read(const boost::system::error_code& e)
 //Show All Cars
 void Client::handle_Show_All_Cars(const boost::system::error_code& e) {
 	
+	ManageCar manageCar_;
 
-	connection_.async_read(test_,
+	connection_.async_read(manageCar_.cars,
 		boost::bind(&Client::Show_All_Cars, this,
 			boost::asio::placeholders::error));
 }
 
 void Client::Show_All_Cars(const boost::system::error_code& e) {
-	cout << test_ << endl;
+	ManageCar manageCar_;
+	cout << manageCar_.getAllCars()<< endl;
 	handle_write(e);
 }
 

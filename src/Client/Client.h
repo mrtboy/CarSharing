@@ -69,6 +69,7 @@ private:
 	Wrapper<Car>::map_Type carWrappr;
 	Wrapper<string>::map_Type messageWrapper;
 	vector<string> container_;
+	
 	string test_;
 	FUNCTIONTYPE functionType_;
 };
