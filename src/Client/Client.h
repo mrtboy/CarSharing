@@ -67,6 +67,7 @@ private:
 	std::vector<string> menu_;
 	char option_ = ' ';
 	User user_;
+	Car car_;
 	MainMenu mainMenu;
 	Wrapper<User>::map_Type userWrapper;
 	Wrapper<Car>::map_Type carWrappr;

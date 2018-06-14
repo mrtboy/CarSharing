@@ -92,13 +92,19 @@ void Client::read_Available_Cars(const boost::system::error_code& e) {
 
 //Rent Car
 void Client::handle_Rent_Car(const boost::system::error_code& e) {
-	connection_.async_read(test_,
+
+	int carID = 0;
+	cout << "Please give in CarID to rent it !: ";
+	cin >> carID;
+	
+	connection_.async_write(carID,
 		boost::bind(&Client::rent_Car, this,
 			boost::asio::placeholders::error));
 }
 
 void Client::rent_Car(const boost::system::error_code& e) {
 	cout << test_ << endl;
+	manageCar_.reserveCar(car_.getID());
 	handle_write(e);
 }
 

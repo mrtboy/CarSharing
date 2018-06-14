@@ -34,8 +34,6 @@ bool ManageCar::insert(Car model)
 	
 }
 
-
-
 bool ManageCar::reserveCar(int id) {
 
 
@@ -52,10 +50,7 @@ bool ManageCar::reserveCar(int id) {
 
 }
 
-//Car* ManageCar::getCarById(int id)
-//{
-//	return NULL;
-//}
+
 //ManageCar::ManageCar()
 //{
 //	return;

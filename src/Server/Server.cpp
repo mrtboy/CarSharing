@@ -19,17 +19,12 @@ Server::Server(boost::asio::io_service& io_service, unsigned short port)
 	manageUser.insert(user5);
 
 
-	Car car1{ "Reza1",3500,"Kiel",123456,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
-	Car car2{ "Reza2",5000,"Kiel",123456,"VW",2018,"Diesel",5,5,"?","6","Benzin",true };
+	Car car1{ "Reza1",3500,"Kiel",1,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
+	Car car2{ "Reza2",5000,"Kiel",2,"VW",2018,"Diesel",5,5,"?","6","Benzin",true };
 
 	ManageCar manageCar;
 	manageCar.insert(car1);
 	manageCar.insert(car2);
-
-
-
-
-
 
 	// Start an accept operation for a new connection.
 	connection_ptr new_conn(new Connection(acceptor_.get_io_service()));
@@ -77,9 +72,8 @@ void Server::handle_Show_Available_Cars(const boost::system::error_code& e, conn
 void Server::handle_Rent_Car(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Rent_Car";
 	cout << test_ << endl;
-	conn->async_write(test_,
-		boost::bind(&Server::handle_write, this,
-			boost::asio::placeholders::error, conn));
+	manageCar_.reserveCar(carID_);
+	handle_write(e, conn);
 }
 
 //Return Car
@@ -147,7 +141,7 @@ void Server::handle_read(const boost::system::error_code& e, connection_ptr conn
 			break;
 		case RENT:
 			cout << "RENT" << endl;
-			conn->async_write(test_,
+			conn->async_read(carID_,
 				boost::bind(&Server::handle_Rent_Car, this,
 					boost::asio::placeholders::error, conn));
 			break;
