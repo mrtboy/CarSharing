@@ -17,6 +17,8 @@ BOOST_AUTO_TEST_CASE(testManageCar)
 	Car car1{ "Reza1",3500,"Kiel",1,"VW",2018,"Diesel",5,5,"?","6","Diesel",true };
 	;
 	ManageCar manageCar;
+
+
 	manageCar.insert(car1);
 
 
@@ -48,11 +50,13 @@ BOOST_AUTO_TEST_CASE(testManageCar)
 	BOOST_CHECK(expected_value11 == car1.getConsumption());
 	BOOST_CHECK(expected_value12 == car1.getType());
 	BOOST_CHECK(expected_value13 == car1.getIsAvailable());
+	BOOST_REQUIRE(manageCar.reserveCar(expected_value4) == true);
+	BOOST_REQUIRE(manageCar.insert(car1) == true);
+	
+
+	
 
 }
-
-
-
 
 
 BOOST_AUTO_TEST_SUITE_END();
