@@ -103,9 +103,6 @@ void Server::Add_New_Car(const boost::system::error_code& e, connection_ptr conn
 }
 
 
-
-
-
 //Find Car
 void Server::handle_Find_Car(const boost::system::error_code& e, connection_ptr conn) {
 	test_ = "handle_Find_Car";
